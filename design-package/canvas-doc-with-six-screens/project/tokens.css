@@ -1,0 +1,150 @@
+/* binjreel design tokens — v1.0 FINAL
+   Source of truth: "binjreel Handoff Package.dc.html" §1
+   Drop this in as-is. Never hardcode a hex outside this file. */
+
+:root {
+  /* ── surfaces ───────────────────────────────── */
+  --bg-base:        #0A0A0B;
+  --bg-raised:      #141416;
+  --bg-card:        #17171A;
+  --bg-overlay:     #1D1D21;
+  --bg-inset:       #0F0F11;   /* form fields */
+  --border-hairline:#2A2A30;
+  --border-strong:  #33333C;
+
+  /* ── text ───────────────────────────────────── */
+  --text-primary:   #F7F5F2;
+  --text-body:      #D8D4CF;
+  --text-secondary: #A9A6A1;
+  --text-muted:     #6E6B68;
+  --text-disabled:  #4A464F;
+
+  /* ── act (tangerine) · money & intent ───────── */
+  --act:            #FF7A1A;   /* fill */
+  --act-text:       #FF7A1A;   /* type */
+  --act-hover:      #FF9A4D;
+  --act-pressed:    #E56405;
+  --act-on:         #150900;   /* type ON an --act fill */
+  --act-tint:       rgba(255,122,26,.12);
+  --act-border:     rgba(255,122,26,.45);
+
+  /* ── free (lime) · free & earned ────────────── */
+  --free:           #C6FF4A;
+  --free-text:      #C6FF4A;
+  --free-on:        #111A00;
+  --free-tint:      rgba(198,255,74,.08);
+  --free-border:    rgba(198,255,74,.42);
+
+  /* ── heat (pink) · crowd & heat. NEVER a button, NEVER on the paywall ── */
+  --heat:           #FE2C55;
+  --heat-text:      #FE2C55;
+  --heat-pressed:   #E01E45;
+  --heat-on:        #FFFFFF;
+  --heat-tint:      rgba(254,44,85,.16);
+  --heat-border:    rgba(254,44,85,.45);
+  --heat-surface:   #2A0714;
+
+  /* ── status ─────────────────────────────────── */
+  --coin:           #FFC53D;
+  --success:        #38D67A;
+  --danger:         #B3182F;   /* destructive actions only */
+  --danger-text:    #FF6B6B;
+
+  /* ── gradients ──────────────────────────────── */
+  --scrim-hero: linear-gradient(180deg, rgba(10,10,11,.72) 0%, rgba(10,10,11,0) 26%, rgba(10,10,11,.55) 62%, #0A0A0B 100%);
+  --scrim-header: linear-gradient(180deg, rgba(10,10,11,.88) 0%, rgba(10,10,11,.62) 52%, rgba(10,10,11,0) 100%);
+  --scrim-card-title: linear-gradient(180deg, rgba(0,0,0,0) 48%, rgba(0,0,0,.82) 100%);
+  --scrim-hero-web-x: linear-gradient(90deg, rgba(10,10,11,.95) 0%, rgba(10,10,11,.7) 38%, rgba(10,10,11,.18) 62%, rgba(10,10,11,.9) 100%);
+  --grad-door-hero: linear-gradient(150deg, #2A1405 0%, #171015 70%);
+  --grad-auth-glow: radial-gradient(120% 60% at 50% 0%, rgba(255,122,26,.14) 0%, rgba(10,10,11,0) 62%);
+
+  /* ── elevation ──────────────────────────────── */
+  --e1: 0 8px 20px -12px rgba(0,0,0,.7);
+  --e2: 0 -20px 50px -10px rgba(0,0,0,.4);
+  --e3: 0 12px 26px -12px rgba(255,122,26,.7);
+  --glass-bg: rgba(255,255,255,.13);
+  --glass-border: rgba(255,255,255,.14);
+  --glass-blur: blur(14px);
+  --focus-ring: 0 0 0 4px var(--act-tint);
+
+  /* ── type ───────────────────────────────────── */
+  --font-display: 'Gabarito', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── radius ─────────────────────────────────── */
+  --r-badge: 5px;
+  --r-sm: 9px;
+  --r-chip: 11px;
+  --r-btn: 14px;
+  --r-card: 14px;
+  --r-sheet: 18px;
+  --r-modal: 22px;
+  --r-full: 999px;
+
+  /* ── space (4pt) ────────────────────────────── */
+  --s1: 4px;  --s2: 8px;  --s3: 11px; --s4: 14px;
+  --s5: 18px; --s6: 22px; --s7: 26px; --s8: 34px; --s9: 44px;
+  --gutter-mob: 20px;
+  --gutter-web: 40px;
+  --tabbar-h: 84px;       /* incl. 34px safe area */
+  --header-web-h: 72px;
+  --hit-min: 44px;
+
+  /* ── motion ─────────────────────────────────── */
+  --snap:  120ms cubic-bezier(.2,.8,.2,1);      /* taps, chips, toggles */
+  --glide: 240ms cubic-bezier(.22,1,.36,1);     /* sheets, overlays, shelf snap */
+  --pop:   380ms cubic-bezier(.34,1.56,.64,1);  /* unlock confirm, coin count */
+  --overlay-autohide: 2400ms;
+}
+
+/* ══ LIGHT ══ Only the values below change. Accent FILLS keep their bright
+   value; only accent TYPE drops to its darker twin. */
+[data-theme="light"] {
+  --bg-base:        #FAFAF9;
+  --bg-raised:      #FFFFFF;
+  --bg-card:        #EDEAE4;
+  --bg-overlay:     #F2F0EB;
+  --bg-inset:       #F6F5F1;
+  --border-hairline:#E5E2DC;
+  --border-strong:  #D5D1C8;
+
+  --text-primary:   #131210;
+  --text-body:      #3D3A34;
+  --text-secondary: #5A564E;
+  --text-muted:     #8A857B;
+  --text-disabled:  #B4AFA5;
+
+  --act:            #FF7A1A;   /* fill unchanged */
+  --act-text:       #D45400;   /* 4.6:1 on --bg-base */
+  --act-pressed:    #B84800;
+  --act-on:         #2A1000;
+  --act-tint:       #FFF6EF;
+  --act-border:     #F5C9A3;
+
+  --free:           #C6FF4A;   /* fill unchanged */
+  --free-text:      #3E7D1F;
+  --free-tint:      #F4FAEA;
+  --free-border:    #C8E3A8;
+
+  --heat:           #FE2C55;   /* fill unchanged */
+  --heat-text:      #D91242;   /* 4.5:1 */
+  --heat-tint:      #FFF0F3;
+  --heat-border:    #F8C2D0;
+
+  --coin:           #C98A00;
+  --coin-text:      #8A5B00;   /* money in tables, 4.5:1 on white */
+  --coin-tint:      #FDF3DA;
+  --success:        #2F6216;
+  --danger:         #B3182F;
+  --danger-tint:    #FEF2F2;
+
+  --e1: 0 1px 2px rgba(19,18,16,.04);
+  --e2: 0 -20px 50px -10px rgba(0,0,0,.4);
+  --e3: 0 8px 18px -8px rgba(255,122,26,.5);
+  --grad-auth-glow: radial-gradient(120% 60% at 50% 0%, rgba(255,122,26,.1) 0%, rgba(250,250,249,0) 62%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --snap: 1ms; --glide: 1ms; --pop: 1ms; }
+}
