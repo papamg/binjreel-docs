@@ -1387,3 +1387,69 @@ both transcribed from L-044 and marked CLOSED.
 **Not touched, by order:** `STATE.md`, `TDD.md`, `DECISIONS.md`, `/docker/PROJECTS.md` — the
 Architect advances those and delivers them through `cubby/`. No code, no features, no deploy in this
 order.
+
+---
+
+## L-047 · 2026-07-31 · DOCUMENT PLACEMENT — the v0.5 drop completed: stage contract, D-017…D-023, STATE baton; TDD citations reconciled
+**Document placement only.** No code, no features, no deploy, no build. The v0.5 build is a
+separate order and was not opened.
+
+**Why this entry has two halves.** The drop arrived in two parts. The **TDD advance landed
+first** (five Architect-authored edits: target line v0.3→v0.5, §11(4) v0.4 row to
+Owner-certified, §11(5) rewritten as the live target, §9.2 superseded by D-023, §8 gaining the
+D-022 pricing block). That left `TDD.md` citing a stage contract and two decisions **that were
+not yet on the box** — `docs/CONTEXT-v0.5.md`, D-022 and D-023 all dangled. The TDD edit was
+therefore **deliberately held uncommitted** until the rest of the set arrived, so the record was
+never published in a self-contradicting state. This entry closes that window: the citations now
+resolve and the whole set is committed as one.
+
+**Part 1 — the two dropped citations restored.** The §11(4) As-built line had been reduced to
+`L-036…L-046 · conformance-v2 · DL-B009/B011 closed` when the new As-built replaced the old one
+during the TDD merge, dropping the `BUILD-REPORT` and `SECURITY-REPORT v0.4` references. Both are
+back:
+`*As-built: L-036…L-046 · BUILD-REPORT · SECURITY-REPORT v0.4 · conformance-v2 · DL-B009/B011 closed.*`
+Nothing else in the TDD was changed by this order.
+
+**Part 2 — three files placed from `cubby/`.**
+| From | To | Mode | Result |
+|---|---|---|---|
+| `cubby/CONTEXT-v0.5.md` | `docs/CONTEXT-v0.5.md` | new file | placed; **no existing CONTEXT touched** — `CONTEXT.md`, `-v0.1`, `-v0.2`, `-v0.4` all retain their original mtimes, v0.4's remaining the prior stage's as-ordered record |
+| `cubby/DECISIONS-append-v0.5.md` | `docs/DECISIONS.md` | **append-only** | D-017…D-023 added |
+| `cubby/STATE.md` | `docs/STATE.md` | overwrite | the baton rewritten to current truth |
+
+**Append-only proven, not asserted.** `DECISIONS.md` was 246 lines / sha256 `911220416ecbe8f6`
+before. After the append, the **first 246 lines hash to exactly that same value** — the prior
+record is byte-identical, nothing rewritten, renumbered or reordered. File is now 339 lines.
+Numbering verified whole: **D-001…D-023 each present exactly once, zero duplicates** (16/16
+pre-existing intact, 7/7 new).
+
+**`cp` + `rm`, never `mv` — and the inode proves it.** `mv` would replace the destination inode
+and leave the file root-owned, reintroducing the DL-B004 cross-ownership failure where the
+Architect cannot rewrite a file the Worker created. `docs/STATE.md` kept its **original inode**
+through the overwrite. Ownership then set to **1000:1000 on every touched file** —
+`CONTEXT-v0.5.md`, `DECISIONS.md`, `STATE.md`, `TDD.md`, `BUILD-LEDGER.md`. Two of those
+(`STATE.md`, `TDD.md`) had been sitting `0:0` and would have been unwritable by the Architect;
+they are not now. The three cubby copies were removed; the unrelated
+`cubby/Rules for a video - Sheet1.csv` was left alone.
+
+**Part 3 — reconciliation. Every TDD reference now resolves:** `docs/CONTEXT-v0.5.md` exists ·
+D-022 present in `DECISIONS.md` · D-023 present in `DECISIONS.md` · the `HANDOFF.md` governing
+visual contract resolves in the design package. The incoming `STATE.md` was **identity-checked
+before it was allowed to overwrite** — STATE's own DL-010 warning records a bare `TDD.md` from
+another project being uploaded over binjreel's by name collision, so this is not a formality. It
+passed all four `PROJECTS.md` phrases: `binjreel` · `binjreel-dev` · `papamg/binjreel` ·
+multi-tenant-ready SaaS at audit tier high. It also **resolves W-002** — credential scope
+account-wide, proven read and write against a second `papamg` repo, with the per-repo lookup
+caveat carried forward as backlog.
+
+**Raised, not acted on (the Architect owns `/docker/PROJECTS.md`).** The new STATE describes the
+product as *"a vertical micro-series platform for every genre, comedy first, including
+micro-docs. Content by Journey Viral"*. That is a **third** descriptor: the registry says
+*Short-Form Vertical Drama Platform* and carries a 2026-07-25 reconciliation note blessing that
+phrase and *Short Form Video Delivery Platform*. Per that note a name mismatch alone is **not** a
+WRONG-PROJECT signal and stopping on it would be a false stop — so placement proceeded. But the
+registry's identity-check phrase list has now drifted from the STATE it is meant to validate, and
+only the Architect can close that.
+
+**Published.** The docs repo (`papamg/binjreel-docs`, established L-046 / the credential run) was
+committed and pushed with the TDD advance and this placement **as a single consistent commit**.

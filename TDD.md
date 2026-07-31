@@ -8,7 +8,8 @@ ratified 2026-07-28** against the design set (PLATFORM-DESIGN.md · BUILD-PLAN-v
 MARKET-LANDSCAPE.md — all in this /docs). v1 sections that shipped are preserved below as the
 as-built record; v1's roadmap is superseded by §11.*
 
-*Authored by the Architect (4A). Current target: **v0.3 — the client contract.***
+*Authored by the Architect (4A). Current target: **v0.5 — native shell + money (launchable).**
+Baseline: v0.4 BUILT, DEPLOYED, and Owner-certified at GATE-3 2026-07-31.*
 
 ---
 
@@ -125,6 +126,16 @@ now exercised twice: **ad-SSV credits** (D-017) and the **Stripe web lane** (D-0
 prices, sub tiers, perk sets, reward values, caps, and expiries are all config — tunable without
 a code change or store review.
 
+**Prices are set (D-022, Owner-ratified 2026-07-31).** 1 coin = $0.01 nominal; an episode
+unlock is **30 coins, flat across every series and every position**, displayed before the tap;
+two free episodes by default, per-series overridable, with the displayed count always equal to
+the real one. Packs $1.99/$4.99/$9.99/$24.99/$49.99, bonus rising by tier. Subscription $5.99
+weekly ($3.99 first week) and $49.99 annual; monthly is an unset slot, not offered at launch.
+The category's dominant players vary per-episode price opaquely and deeper into a series; this
+platform does not, because the voice rule is *numbers are facts, never bait* and the
+differentiator is being the platform a viewer does not resent. Every value is config — tunable
+without a code change or a store review, so the decision is reversible at any time.
+
 ## 9 — The engagement layer (new in v2)
 
 **9.1 Browse.** Catalog reads (series/episodes/genres/tags), shelf composition, Top-10
@@ -134,8 +145,11 @@ episode grid with lock states, related), tag pages, genre hubs. Publish-state ho
 
 **9.2 Rewards.** Check-in/streaks, task registry, referral graph, the ad-SSV endpoint, caps.
 The wall gains its third door: coins / unlimited / **watch one ad** (time-boxed or permanent
-entitlement, config). Reward-coin expiry is always visible to the viewer — the category's dark
-pattern inverted into a trust signal.
+entitlement, config). **Reward coins do not expire (D-023).** The v0.4 Rewards surface shipped
+that promise publicly and it stands; an inverted dark pattern is still the dark pattern, and
+vanishing earned balances are the category's most-cited grievance. `coin_class` and the expiry
+machinery remain in the ledger and are untouched, so this is reversible in config — but no
+expiry is set on reward credits, no expiry sweep is built, and no surface implies one.
 
 **9.3 Retention.** Follows + new-episode push fanout on scheduled drops; continue-watching;
 low-balance warning ahead of a failed unlock; share-the-moment links (timestamped, origin-
@@ -184,21 +198,32 @@ scalability/tenancy audit remains a named pre-traffic gate.
    tests; money core diff 0 lines. *As-built: BUILD-LEDGER L-031…L-034 · BUILD-REPORT ·
    SECURITY-REPORT v0.3 (F-004 fixed; N-008 notes the engine's publish-state check for its
    next ordered touch).*
-4. **v0.4 — player & browse, web face (Expo): ✅ BUILT + DEPLOYED LIVE 2026-07-28 (GATE-3 =
-   Owner's viewing, pending).** Expo/expo-router codebase at `app/web/` (D-019; `VideoSurface`
-   is the one platform-split module, native side an explicit v0.5 seam); five-tab shell, hero/
-   shelf home, SEO show pages (server-injected), tags/hubs/search/My List, hls.js vertical
-   player (prefetch-fed swipe, mid-session re-mint via token-prefix rewrite, captions/speed/
-   quality/drawer), the three-door wall from the offer verbatim, share-moment + /s/ landing,
-   For You teaser feed, REAL admin identity (bcrypt hash-only, forced first-login change,
-   uniform failures, hard rate limit) + thin /admin panel behind a server-side allow-listed
-   proxy (D-014 token never in a browser — proven). Design tokens: `app/web/DESIGN.md`.
-   *As-built: L-036…L-038 · BUILD-REPORT · SECURITY-REPORT v0.4. Deferred-by-order: store
-   sign-in providers (accounts), IAP (v0.5), ad network (v0.6).*
-5. **v0.5 — native shell + money (launchable).** Store builds, StoreKit/Play Billing flows
-   (server-verified), deferred deep link, push, cold start into the scene, check-in/streak +
-   task center (the no-ad-network rewards half). Gated: store accounts · ledger backup before
-   real receipts · pricing config · compliance set.
+4. **v0.4 — player & browse, web face (Expo): ✅ BUILT + DEPLOYED + OWNER-CERTIFIED AT GATE-3
+   2026-07-31.** Design accepted at 390 and 1440; the forced admin password change performed.
+   Beyond the original scope, this version also absorbed the restyle to the ratified design
+   package, the conformance-completion redirect (assets wired, 1440 layouts implemented, hard
+   rules swept, DL-B009 fixed), and the Owner's punch-list pass. Governing visual contract:
+   `docs/design-package/…/project/HANDOFF.md` in full. Expo/expo-router codebase at `app/web/`
+   (D-019; `VideoSurface` is the one platform-split module, native side an explicit v0.5 seam);
+   five-tab shell, hero/shelf home, SEO show pages (server-injected), tags/hubs/search/My List,
+   hls.js vertical player (prefetch-fed swipe, mid-session re-mint via token-prefix rewrite,
+   captions/speed/quality/drawer), the three-door wall from the offer verbatim, share-moment +
+   /s/ landing, For You teaser feed, REAL admin identity (bcrypt hash-only, forced first-login
+   change, uniform failures, hard rate limit) + thin /admin panel behind a server-side
+   allow-listed proxy (D-014 token never in a browser — proven). Design tokens:
+   `app/web/DESIGN.md`. *As-built: L-036…L-046 · BUILD-REPORT · SECURITY-REPORT v0.4 · conformance-v2 ·
+   DL-B009/B011 closed.*
+5. **v0.5 — native shell + money (launchable). ← CURRENT TARGET.** Stage contract:
+   `docs/CONTEXT-v0.5.md`, **phased**: Phase A needs no store account and does not wait —
+   native iOS/Android against the one Expo codebase (`VideoSurface`'s native seam), cold start
+   into the scene, deferred deep link with its origin tag surviving install, onboarding to
+   HANDOFF §9.3/§9.4, the D-022 pricing configuration, the rewards half with no ad network in it
+   (check-in, streaks, tasks, referrals), the continuous ledger backup mechanism, and the
+   engine's publish-state touch (N-008). Phase B is the money proof and opens on the store
+   accounts — StoreKit and Play Billing client flows against the already-built server
+   verification, sandbox purchase → real receipt → real unlock, push, store sign-in providers.
+   Gated: **store accounts (D-U-N-S lead time is the clock)** · ledger backup before real
+   receipts · compliance set before submission.
 6. **v0.6 — the ad economy. ← LAUNCH LINE.** Mediation SDK (rewarded video only), ad-SSV
    endpoint, watch-ads-for-coins, rewarded-ad unlock, caps, referrals. Gated: ad-network
    account.

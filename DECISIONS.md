@@ -244,3 +244,96 @@ file, still uselessly narrow to an attacker without a fresh mint. Unit tests rec
 reference algorithm independently; the live edge proof is the regression oracle at every future
 GATE-3. URLs are not IP-locked (mobile clients roam networks mid-session) — revisit only with
 data. Open on the Director: the zone's empty-referer 403 (DL-B006 discovery) before v0.3.
+
+## D-017 · The three-legged economy is in-design
+*Ratified in TDD v2, 2026-07-28. Logged here at the v0.5 docs touch.*
+
+Coins **plus** subscription **plus** a free-earning rewards economy (check-ins, streaks, rewarded
+ads, rewarded-ad episode unlock, tasks, referrals). Supersedes v1's "no reward-earning surfaces"
+exclusion.
+
+**The constraint that makes it safe:** every reward credit is an ordinary ledger entry written
+under D-011 and D-012 — no new money path, no privileged write, no bypass. Ad rewards credit
+**only** on the ad network's server-side verification callback, signature-verified and
+idempotent: the store-receipt pattern applied to ads. Rewarded video only; no interstitial or
+banner formats, a deliberate rejection of the category's worst pattern.
+
+## D-018 · Genre is a first-class dimension
+*Ratified in TDD v2, 2026-07-28.*
+
+Series carry `genre` and a `nonfiction` flag. Genre drives hub pages, default free-episode counts,
+and presentation. Tags remain many-per-series and are first-class navigation. Built in v0.3.
+
+## D-019 · The client is Expo/React Native, web face first
+*Ratified in TDD v2, 2026-07-28.*
+
+One codebase, three faces: web (the funnel catcher and SEO surface), iOS, Android. The video
+component is the one platform-split module. Web shipped at v0.4; the native side is v0.5's
+explicit seam.
+
+## D-020 · Web top-up lane
+*Ratified in TDD v2, 2026-07-28.*
+
+Stripe coin purchases on the web face at a bonus-coin advantage — a new credit source into the
+source-agnostic wallet, with zero entitlement change. **The app never links to it** (store
+policy). The seam is designed now; activation is a launch-window Director decision and is
+explicitly out of scope for v0.5.
+
+## D-021 · Curated supply, phased
+*Ratified in TDD v2, 2026-07-28.*
+
+Phase 1 Journey Viral produces. Phase 2 invited studios as tenants/labels with ledger-derived
+revenue-share statements. Phase 3 a self-serve studio portal. Open UGC is explicitly out. The
+audited wallet is the trust product that brings a partner's catalogue.
+
+## D-022 · Flat, visible per-episode pricing — 30 coins, one price, everywhere
+*Owner-ratified 2026-07-31.*
+
+**The decision.** 1 coin = $0.01 nominal. An episode unlock costs **30 coins ($0.30), flat across
+every series and every position in a series**, displayed before the tap. Two free episodes by
+default, per-series overridable, with the displayed count always equal to the real one. Packs at
+$1.99/$4.99/$9.99/$24.99/$49.99 with bonus rising by tier. Subscription $5.99 weekly ($3.99 first
+week) and $49.99 annual; monthly exists as an unset config slot and is not offered at launch.
+
+**Why flat, against the category.** The dominant players vary per-episode coin prices opaquely —
+the same series observed moving from 42 to 66 coins mid-run, and independent reviews reporting
+per-episode costs anywhere from roughly 18 to 55 coins depending on the series and how deep the
+viewer already is. It works: those two platforms take roughly 70% of global short-drama in-app
+purchase revenue. It also produces the category's defining split — a 4.6★ App Store rating
+against 1.6★ on Trustpilot: one number for the download, another for the bank statement.
+
+Escalating hidden prices is the same instinct as the countdown timers and fake scarcity this
+project already refused to build, and it contradicts the ratified voice rule — *numbers are
+facts, never bait*. binjreel's differentiator is being the platform a viewer does not resent. A
+viewer who finishes a comedy series for a few dollars and tells someone is worth more to this
+platform than one extracted from and lost.
+
+**Cost of the decision, stated plainly:** less revenue per heavy spender. Accepted.
+
+**Mechanically:** all of these are config values, not compiled constants — that property has
+existed since v0.1. Every number here is tunable without a code change or a store review, so this
+decision is reversible at any time before or after launch.
+
+## D-023 · Reward coins do not expire
+*Architect, 2026-07-31 — determinable, decided, reported not escalated.*
+
+**The conflict found.** TDD v2 §9.2 and D-017 describe reward coins as expiring, with the expiry
+made visible to the viewer as "the category's dark pattern inverted into a trust signal." But the
+Rewards surface shipped at v0.4 and live at binjreel.com states plainly that **coins never
+expire**. Both cannot be true, and one of them is already a public promise.
+
+**The decision: reward coins do not expire.** The shipped copy stands.
+
+**Reasoning.** A promise already made to viewers is not reversed for a monetisation lever,
+particularly one whose entire strategic value was supposed to be *trust*. Expiry is also the
+single most-cited grievance in the category's negative reviews — earned balances vanishing
+between sessions with no restore path. An inverted dark pattern is still the dark pattern; the
+genuinely differentiated position is not having one.
+
+**Mechanically:** `coin_class` stays on the ledger and expiry remains *supported* — the column,
+the spend ordering, and the machinery all survive untouched, so this is reversible in config. No
+expiry is set on reward credits, no expiry sweep is built, and no surface implies one. TDD §9.2's
+"reward-coin expiry is always visible" line is superseded by this entry.
+
+**Reversible, and the window is now.** No real coins have been earned by any real viewer, so
+reversing this costs nothing today and costs trust the moment it does not.
